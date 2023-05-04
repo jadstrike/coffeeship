@@ -1,0 +1,9 @@
+.custom-button:hover {
+  border-color: #ffdcb6;
+  background-color: #ffdcb6;
+  border-style: dashed;
+}
+.ant-btn:active,
+.ant-btn:focus {
+  background-color: #ffdcb6;
+}
