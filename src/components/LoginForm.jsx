@@ -1,7 +1,14 @@
 import { Card } from "antd";
+import { FacebookFilled, GoogleCircleFilled } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
+import ReCAPTCHA from "react-google-recaptcha";
+
 import "./LoginForm.css";
 import { Link } from "react-router-dom";
+
+const onChange = () => {
+  console.log("Succcess Capcha");
+};
 
 const LoginForm = () => {
   const onFinish = (formdata) => {
@@ -55,6 +62,23 @@ const LoginForm = () => {
         <Form.Item name="remember" valuePropName="checked">
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
+        <Form.Item
+          name="recaptcha"
+          rules={[
+            {
+              required: true,
+              message: "Please complete the ReCAPTCHA",
+            },
+          ]}
+          validateTrigger="onBlur"
+        >
+          <ReCAPTCHA
+            title="Hello"
+            sitekey={import.meta.env.VITE_API_RECAPCHAKEY}
+            onChange={onChange}
+            // onExpired={onExpired}
+          />
+        </Form.Item>
 
         <Form.Item>
           <Button
@@ -72,11 +96,28 @@ const LoginForm = () => {
           </Button>
         </Form.Item>
       </Form>
-      <button className="bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow">
-        Sign In with Google
+      {/* <ReCAPTCHA
+        title="Hello"
+        sitekey={import.meta.env.VITE_API_RECAPCHAKEY}
+        onChange={onChange}
+      /> */}
+      <button className="flex flex-row justify-center space-x-2 bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow">
+        <div> Sign in with Google</div>
+
+        <GoogleCircleFilled
+          // spin={true}
+          style={{ fontSize: "20px", color: "black" }}
+          className="mt-0.5"
+        />
       </button>
-      <button className="bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow">
-        Sign in with Facebook
+      <button className="flex flex-row justify-center space-x-2 bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow">
+        <div> Sign in with Facebook</div>
+
+        <FacebookFilled
+          // spin={true}
+          style={{ fontSize: "20px", color: "#3b5998" }}
+          className="mt-0.5"
+        />
       </button>
       <Link
         to="/"

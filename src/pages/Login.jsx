@@ -5,7 +5,7 @@ const Login = () => {
   // console.log(import.meta.env.VITE_API_KEY);
   return (
     <div className="">
-      <div className="  h-screen flex flex-col mt-16 items-center">
+      <div className="  h-screen flex flex-col mt-10 items-center">
         <Avatar
           size={70}
           shape="square"
