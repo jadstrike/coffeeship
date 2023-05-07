@@ -1,6 +1,10 @@
 import { Card } from "antd";
 import { FacebookFilled, GoogleCircleFilled } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
+import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../utils/firebase";
+import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 
 import "./LoginForm.css";
@@ -11,6 +15,18 @@ const onChange = () => {
 };
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const googleProvider = new GoogleAuthProvider();
+  const GoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log(result.user);
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onFinish = (formdata) => {
     console.log(formdata);
   };
@@ -59,9 +75,6 @@ const LoginForm = () => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item name="remember" valuePropName="checked">
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
         <Form.Item
           name="recaptcha"
           rules={[
@@ -96,17 +109,17 @@ const LoginForm = () => {
           </Button>
         </Form.Item>
       </Form>
-      {/* <ReCAPTCHA
-        title="Hello"
-        sitekey={import.meta.env.VITE_API_RECAPCHAKEY}
-        onChange={onChange}
-      /> */}
-      <button className="flex flex-row justify-center space-x-2 bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow">
+      <button
+        onClick={GoogleLogin}
+        className="flex flex-row justify-center space-x-2 bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow"
+      >
         <div> Sign in with Google</div>
 
-        <GoogleCircleFilled
+        <FcGoogle
           // spin={true}
-          style={{ fontSize: "20px", color: "black" }}
+          style={{
+            fontSize: "20px",
+          }}
           className="mt-0.5"
         />
       </button>
@@ -120,7 +133,7 @@ const LoginForm = () => {
         />
       </button>
       <Link
-        to="/"
+        to="/register"
         className="flex flex-col text-[#867070] justify-center items-center"
       >
         Register to board CoffeeShip
