@@ -82,7 +82,7 @@ const LoginForm = () => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item
+        {/* <Form.Item
           name="recaptcha"
           rules={[
             {
@@ -98,7 +98,7 @@ const LoginForm = () => {
             onChange={onChange}
             // onExpired={onExpired}
           />
-        </Form.Item>
+        </Form.Item> */}
 
         <Form.Item>
           <Button
