@@ -2,7 +2,12 @@ import { Card } from "antd";
 import { FacebookFilled, GoogleCircleFilled } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
 import { FcGoogle } from "react-icons/fc";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  FacebookAuthProvider,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -20,6 +25,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
+  //SIGN IN WITH GOOGLE
   const GoogleLogin = async () => {
     setLoading(true);
     try {
@@ -30,6 +36,27 @@ const LoginForm = () => {
     } catch (error) {
       setLoading(false);
       // alert(error);
+      console.log(error);
+    }
+  };
+
+  //SIGN IN WITH FACEBOOK
+  const fbProvider = new FacebookAuthProvider();
+  const FacebookLogin = async () => {
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, fbProvider);
+      const credential = await FacebookAuthProvider.credentialFromResult(
+        result
+      );
+      const token = credential.accessToken;
+      let photoUrl = result.user.photoURL + "?height=500&access_token=" + token;
+      await updateProfile(auth.currentUser, { photoURL: photoUrl });
+      console.log(result);
+      setLoading(false);
+      navigate("/home");
+    } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
@@ -130,7 +157,10 @@ const LoginForm = () => {
           className="mt-0.5"
         />
       </button>
-      <button className="flex flex-row justify-center space-x-2 bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow">
+      <button
+        onClick={FacebookLogin}
+        className="flex flex-row justify-center space-x-2 bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow"
+      >
         <div> Sign in with Facebook</div>
 
         <FacebookFilled
