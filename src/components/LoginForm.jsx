@@ -6,23 +6,30 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import { CubeSpinner } from "react-spinners-kit";
 
 import "./LoginForm.css";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const onChange = () => {
   console.log("Succcess Capcha");
 };
 
 const LoginForm = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
   const GoogleLogin = async () => {
+    setLoading(true);
     try {
       const result = await signInWithPopup(auth, googleProvider);
       console.log(result.user);
+      setLoading(false);
       navigate("/home");
     } catch (error) {
+      setLoading(false);
+      // alert(error);
       console.log(error);
     }
   };
@@ -34,7 +41,7 @@ const LoginForm = () => {
   const onFinishFailed = (values) => {
     console.log(values);
   };
-  return (
+  return !loading ? (
     <Card style={{ borderColor: "#867070" }}>
       <h1 className=" flex justify-center mb-4 text-xl">CoffeeShip</h1>
       <Form
@@ -139,6 +146,10 @@ const LoginForm = () => {
         Register to board CoffeeShip
       </Link>
     </Card>
+  ) : (
+    <div className="  mt-40 flex justify-center items-center">
+      <CubeSpinner frontColor="#8D7B68" backColor="#000000" />
+    </div>
   );
 };
 
