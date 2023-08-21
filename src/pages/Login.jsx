@@ -19,7 +19,7 @@ const Login = () => {
   }, [user]);
   return (
     <div className="">
-      <div className="  h-screen flex flex-col mt-10 items-center">
+      <div className="  h-screen flex flex-col mt-24 items-center">
         <Avatar
           size={70}
           shape="square"

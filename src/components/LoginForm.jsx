@@ -70,8 +70,8 @@ const LoginForm = () => {
   };
   return !loading ? (
     <Card style={{ borderColor: "#867070" }}>
-      <h1 className=" flex justify-center mb-4 text-xl">CoffeeShip</h1>
-      <Form
+      <h1 className="flex justify-center mb-4 text-xl ">CoffeeShip</h1>
+      {/* <Form
         className="flex flex-col justify-center"
         layout="vertical"
         requiredMark={false}
@@ -107,9 +107,9 @@ const LoginForm = () => {
           ]}
         >
           <Input.Password />
-        </Form.Item>
+        </Form.Item> */}
 
-        {/* <Form.Item
+      {/* <Form.Item
           name="recaptcha"
           rules={[
             {
@@ -127,7 +127,7 @@ const LoginForm = () => {
           />
         </Form.Item> */}
 
-        <Form.Item>
+      {/* <Form.Item>
           <Button
             className="custom-button"
             type="primary"
@@ -142,10 +142,10 @@ const LoginForm = () => {
             Sign In
           </Button>
         </Form.Item>
-      </Form>
+      </Form> */}
       <button
         onClick={GoogleLogin}
-        className="flex flex-row justify-center space-x-2 bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow"
+        className="flex flex-row justify-center w-[200px] py-2 mt-0 mb-2 space-x-2 font-semibold text-center text-gray-800 bg-white border border-gray-400 rounded-lg shadow hover:bg-gray-100"
       >
         <div> Sign in with Google</div>
 
@@ -157,9 +157,9 @@ const LoginForm = () => {
           className="mt-0.5"
         />
       </button>
-      <button
+      {/* <button
         onClick={FacebookLogin}
-        className="flex flex-row justify-center space-x-2 bg-white mb-2 mt-0 w-full text-center hover:bg-gray-100 text-gray-800 font-semibold py-2  border border-gray-400 rounded-lg shadow"
+        className="flex flex-row justify-center w-full py-2 mt-0 mb-2 space-x-2 font-semibold text-center text-gray-800 bg-white border border-gray-400 rounded-lg shadow hover:bg-gray-100"
       >
         <div> Sign in with Facebook</div>
 
@@ -168,16 +168,16 @@ const LoginForm = () => {
           style={{ fontSize: "20px", color: "#3b5998" }}
           className="mt-0.5"
         />
-      </button>
-      <Link
+      </button> */}
+      {/* <Link
         to="/register"
         className="flex flex-col text-[#867070] justify-center items-center"
       >
         Register to board CoffeeShip
-      </Link>
+      </Link> */}
     </Card>
   ) : (
-    <div className="  mt-40 flex justify-center items-center">
+    <div className="flex items-center justify-center mt-40 ">
       <CubeSpinner frontColor="#8D7B68" backColor="#000000" />
     </div>
   );
