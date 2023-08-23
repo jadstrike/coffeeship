@@ -1,4 +1,6 @@
 import { Avatar } from "antd";
+import CoffeeAnimate from "../../lotties/coffee_animate.json";
+import Lottie from "lottie-react";
 import LoginForm from "../components/LoginForm";
 import { useEffect } from "react";
 import { auth } from "../../utils/firebase";
@@ -19,13 +21,8 @@ const Login = () => {
   }, [user]);
   return (
     <div className="">
-      <div className="  h-screen flex flex-col mt-24 items-center">
-        <Avatar
-          size={70}
-          shape="square"
-          src="https://i.imgur.com/jinuOfB.png"
-          className=" mb-5"
-        />
+      <div className="flex flex-col items-center h-screen mt-24 ">
+        <Lottie className=" w-72" animationData={CoffeeAnimate} />
         <LoginForm />
       </div>
     </div>
